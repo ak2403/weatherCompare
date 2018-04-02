@@ -33,7 +33,6 @@ class Dashboard extends Component {
             place = autocomplete.getPlace();
             this.state.selectedCity = place;
         });
-        // this.setState({ selectedCity: autocomplete.getPlace() });
     }
 
 
@@ -42,14 +41,16 @@ class Dashboard extends Component {
             <div>
                 <input id="searchTextField" type="text" onChange={this.populateCity} size="50" autoComplete="on" />
                 <button onClick={this.buttonClick.bind(this)}>Submit</button>
+
+                <div>{this.props.cities ? this.props.cities.base : ''}</div>
             </div>
         )
     }
 }
 
-function mapStateToProps({ dash }) {
+function mapStateToProps({ cities }) {
     return {
-        dash
+        cities
     }
 }
 

@@ -1,8 +1,9 @@
+import { FETCH_CITY } from './types';
+
 export default function(state = null, action){
     switch(action.type){
-        case 'FETCH_CITY':
-            debugger;
-            return state;
+        case FETCH_CITY:
+            return action.payload;
 
         default:
             return state;
