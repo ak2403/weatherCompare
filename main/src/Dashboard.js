@@ -15,7 +15,7 @@ class Dashboard extends Component {
 
     buttonClick = () => {
         // debugger;
-        this.props.fetchCity({ city : this.state.selectedCity.name });
+        this.props.fetchCity({ city : 'chennai' });
     }
 
     populateCity = () => {
