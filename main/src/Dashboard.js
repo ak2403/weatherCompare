@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from './actions';
+import Detailscomponent from './components/detailsComponent';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -42,7 +43,9 @@ class Dashboard extends Component {
                 <input id="searchTextField" type="text" onChange={this.populateCity} size="50" autoComplete="on" />
                 <button onClick={this.buttonClick.bind(this)}>Submit</button>
 
-                <div>{this.props.cities ? this.props.cities.base : ''}</div>
+                <div>
+                    {this.props.cities ? <Detailscomponent selectedCity={this.props.cities}/> : ''}
+                </div>
             </div>
         )
     }
