@@ -10,15 +10,22 @@ class detailsComponent extends Component {
     }
 
     render() {
-        const { name, sys, coord, wind } = this.props.selectedCity;
+        const { name, sys, coord, wind, main } = this.props.selectedCity;
         return (
             <Grid>
                 <Row className="show-grid">
-                    <Col xs={12} md={8}>
+                    <Col xs={12} md={4}>
                         <Panel>
                             <Panel.Body>
-                                {name}
+                                <span className="temperature">{main.temp}&deg;C</span>
+                                <span className="cityname">{name}</span>
+                                <span className="countryname">{sys.country}</span>
                             </Panel.Body>
+                        </Panel>
+                        <Panel>
+                            Coordinates<br/>
+                            latitude: {coord.lat}
+                            longitude: {coord.lon}
                         </Panel>
                     </Col>
                     <Col xs={6} md={4}>

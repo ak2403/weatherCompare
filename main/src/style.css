@@ -1,0 +1,11 @@
+.temperature{
+    font-size: 100px;
+    display: block;
+}
+.cityname{
+    font-size: 32px;
+    display: block;
+}
+.countryname{
+    font-size: 18px;
+}
