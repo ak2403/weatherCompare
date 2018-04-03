@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Panel } from 'react-bootstrap';
+import { Grid, Row, Col, Panel, Table } from 'react-bootstrap';
 
 class detailsComponent extends Component {
     constructor(props) {
@@ -21,11 +21,57 @@ class detailsComponent extends Component {
                                 <span className="cityname">{name}</span>
                                 <span className="countryname">{sys.country}</span>
                             </Panel.Body>
-                        </Panel>
-                        <Panel>
-                            Coordinates<br/>
-                            latitude: {coord.lat}
-                            longitude: {coord.lon}
+                            <Panel.Body>
+                                <Row className="show-grid tempDetails">
+                                    <Col xs={12} md={3}>
+                                        <img src="./images/temp.png" width="60%" />
+                                    </Col>
+                                    <Col xs={12} md={3}>
+                                        <span className='temps'>Min Temp:
+                                            <block>{main.temp_min}&deg;C</block>
+                                        </span>
+                                        <span className='temps'>Max Temp:
+                                            <block>{main.temp_max}&deg;C</block>
+                                        </span>
+                                    </Col>
+                                    <Col xs={12} md={3}>
+                                        <img src="./images/wind.png" width="60%" />
+                                    </Col>
+                                    <Col xs={12} md={3}>
+                                        <span className='temps'>Speed:
+                                            <block>{wind.speed}&deg;C</block>
+                                        </span>
+                                        <span className='temps'>Degree:
+                                            <block>{wind.deg}&deg;C</block>
+                                        </span>
+                                    </Col>
+                                </Row>
+
+                                <Row className="show-grid tempDetails">
+                                    <Col xs={12} md={3}>
+                                        <img src="./images/humidity.png" width="60%" />
+                                    </Col>
+                                    <Col xs={12} md={3}>
+                                        <span className='temps'>Pressure:
+                                            <block>{main.pressure}</block>
+                                        </span>
+                                        <span className='temps'>Humidity:
+                                            <block>{main.humidity}</block>
+                                        </span>
+                                    </Col>
+                                    <Col xs={12} md={3}>
+                                        <img src="./images/location.png" width="60%" />
+                                    </Col>
+                                    <Col xs={12} md={3}>
+                                        <span className='temps'>Lat:
+                                            <block>{coord.lat}</block>
+                                        </span>
+                                        <span className='temps'>Long:
+                                            <block>{coord.lon}</block>
+                                        </span>
+                                    </Col>
+                                </Row>
+                            </Panel.Body>
                         </Panel>
                     </Col>
                     <Col xs={6} md={4}>

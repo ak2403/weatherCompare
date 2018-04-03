@@ -1,11 +1,30 @@
 .temperature{
     font-size: 100px;
     display: block;
+    text-align: center;
 }
 .cityname{
     font-size: 32px;
     display: block;
+    text-align: center;
 }
 .countryname{
     font-size: 18px;
+    display: block;
+    text-align: center;
+}
+.temps{
+    font-size: 12px;
+    display: block;
+}
+.tempDetails{
+    margin-bottom: 30px;
+}
+.tempDetails img{
+    float: right;
+}
+block{
+    font-weight: bold;
+    font-size: 14px;
+    display: block;
 }

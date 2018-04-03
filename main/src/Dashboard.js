@@ -14,8 +14,7 @@ class Dashboard extends Component {
     }
 
     buttonClick = () => {
-        // debugger;
-        this.props.fetchCity({ city : 'chennai' });
+        this.props.fetchCity({ city : this.state.selectedCity.name });
     }
 
     populateCity = () => {
@@ -38,14 +37,13 @@ class Dashboard extends Component {
 
 
     render() {
-        let cityprops = {"coord":{"lon":80.28,"lat":13.09},"weather":[{"id":802,"main":"Clouds","description":"scattered clouds","icon":"03d"}],"base":"stations","main":{"temp":30,"pressure":1011,"humidity":79,"temp_min":30,"temp_max":30},"visibility":6000,"wind":{"speed":2.6,"deg":180},"clouds":{"all":40},"dt":1522722600,"sys":{"type":1,"id":7834,"message":0.0056,"country":"IN","sunrise":1522715634,"sunset":1522759837},"id":1264527,"name":"Chennai","cod":200};
         return (
             <div>
                 <input id="searchTextField" type="text" onChange={this.populateCity} size="50" autoComplete="on" />
                 <button onClick={this.buttonClick.bind(this)}>Submit</button>
 
                 <div>
-                   <Detailscomponent selectedCity={cityprops}/>
+                    {this.props.cities ? <Detailscomponent selectedCity={this.props.cities}/> : ''}
                 </div>
             </div>
         )
