@@ -36,3 +36,8 @@ block{
     width: 50%;
     float: right;
 }
+.inputPanel{
+    width: 100%;
+    margin: 20px 0;
+    text-align: center;
+}
