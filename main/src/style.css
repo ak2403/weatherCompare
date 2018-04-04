@@ -1,5 +1,5 @@
 .temperature{
-    font-size: 100px;
+    font-size: 90px;
     display: block;
     text-align: center;
 }
@@ -27,4 +27,12 @@ block{
     font-weight: bold;
     font-size: 14px;
     display: block;
+}
+.mainDetailPanel{
+    width: 50%;
+    float: left;
+}
+.secondaryDetailPanel{
+    width: 50%;
+    float: right;
 }

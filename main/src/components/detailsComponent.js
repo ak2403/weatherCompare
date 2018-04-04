@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Panel, Table } from 'react-bootstrap';
+import { Grid, Row, Col, Panel } from 'react-bootstrap';
 
 class detailsComponent extends Component {
     constructor(props) {
@@ -14,14 +14,14 @@ class detailsComponent extends Component {
         return (
             <Grid>
                 <Row className="show-grid">
-                    <Col xs={12} md={4}>
-                        <Panel>
-                            <Panel.Body>
+                    <Col xs={12} md={12}>
+                        <Panel style={{'height': '250px'}}>
+                            <Panel.Body className="mainDetailPanel">
                                 <span className="temperature">{main.temp}&deg;C</span>
                                 <span className="cityname">{name}</span>
                                 <span className="countryname">{sys.country}</span>
                             </Panel.Body>
-                            <Panel.Body>
+                            <Panel.Body className="secondaryDetailPanel">
                                 <Row className="show-grid tempDetails">
                                     <Col xs={12} md={3}>
                                         <img src="./images/temp.png" width="60%" />
@@ -73,9 +73,6 @@ class detailsComponent extends Component {
                                 </Row>
                             </Panel.Body>
                         </Panel>
-                    </Col>
-                    <Col xs={6} md={4}>
-                        <code>&lt;{'Col xs={6} md={4}'} /&gt;</code>
                     </Col>
                 </Row>
             </Grid>
