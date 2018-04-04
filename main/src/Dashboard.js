@@ -8,10 +8,16 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedCity: ''
+            selectedCity: '',
+            isCompare: false
         };
         this.populateCity = this.populateCity.bind(this);
         this.buttonClick = this.buttonClick.bind(this);
+        this.enableCompare = this.enableCompare.bind(this);
+    }
+
+    enableCompare(){
+        this.setState({ isCompare: true });
     }
 
     buttonClick = () => {
@@ -36,14 +42,20 @@ class Dashboard extends Component {
         });
     }
 
-
     render() {
+        let compareElement = '';
+
+        if(this.state.isCompare){
+            compareElement = <input id="searchTextField1" type="text" placeholder="Search your city" onChange={this.populateCity} size="50" autoComplete="on" />;
+        }
 
         return (
             <div>
                 <div className="inputPanel">
                     <input id="searchTextField" type="text" placeholder="Search your city" onChange={this.populateCity} size="50" autoComplete="on" />
                     <button onClick={this.buttonClick.bind(this)}>Submit</button>
+                    <span onClick={this.enableCompare}>Want to Compare</span>
+                    {compareElement}
                 </div>
                 <div>
                     {this.props.cities ? <Detailscomponent selectedCity={this.props.cities.selectedCity} weatherList={this.props.cities.weatherList} /> : ''}

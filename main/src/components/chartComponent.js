@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import TooltipComponent from './tooltipComponent';
 
 class detailsComponent extends Component {
     constructor(props) {
@@ -28,7 +29,7 @@ class detailsComponent extends Component {
                     <XAxis dataKey="name" />
                     <YAxis />
                     <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip />
+                    <Tooltip content={<TooltipComponent details={this.props} />}/>
                     <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
                     <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
                 </LineChart>
