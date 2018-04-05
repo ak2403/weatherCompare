@@ -14,45 +14,63 @@ class Dashboard extends Component {
         this.populateCity = this.populateCity.bind(this);
         this.buttonClick = this.buttonClick.bind(this);
         this.enableCompare = this.enableCompare.bind(this);
+        this.changeState = this.changeState.bind(this);
     }
 
-    enableCompare(){
-        this.setState({ isCompare: true });
+    enableCompare() {
+        this.setState({ isCompare: true, secondaryCity: '' });
     }
 
     buttonClick = () => {
         this.props.fetchCity({ city: this.state.selectedCity.name });
+        if (this.state.isCompare) {
+            this.props.fetchSecondaryCity({ city: this.state.secondaryCity.name });
+        }
+    }
+
+    changeState(state) {
+        this.setState(state);
     }
 
     populateCity = () => {
-        const google = window.google,
-            state = this;
+        const google = window.google;
 
         let options = {
             types: ['geocode'],
-            state: this
-        },
-            place;
+            stateProp: this
+        };
 
-        let autocomplete = new google.maps.places.Autocomplete(document.getElementById('searchTextField'), options);
-
+        let autocomplete = new google.maps.places.Autocomplete(document.getElementById('primaryCity'), options);
         autocomplete.addListener('place_changed', () => {
-            place = autocomplete.getPlace();
-            this.state.selectedCity = place;
+            let place = autocomplete.getPlace();
+            this.changeState({
+                'selectedCity': place
+            });
         });
+
+        if (this.state.isCompare) {
+            let secondaryAutocomplete = new google.maps.places.Autocomplete(document.getElementById('secondaryCity'), options);
+            secondaryAutocomplete.addListener('place_changed', () => {
+                let place = autocomplete.getPlace();
+                this.changeState({
+                    'secondaryCity': place
+                });
+            });
+        }
+
     }
 
     render() {
         let compareElement = '';
 
-        if(this.state.isCompare){
-            compareElement = <input id="searchTextField1" type="text" placeholder="Search your city" onChange={this.populateCity} size="50" autoComplete="on" />;
+        if (this.state.isCompare) {
+            compareElement = <input id="secondaryCity" type="text" placeholder="Search your city" onChange={this.populateCity} size="50" autoComplete="on" />;
         }
 
         return (
             <div>
                 <div className="inputPanel">
-                    <input id="searchTextField" type="text" placeholder="Search your city" onChange={this.populateCity} size="50" autoComplete="on" />
+                    <input id="primaryCity" type="text" placeholder="Search your city" onChange={this.populateCity} size="50" autoComplete="on" />
                     <button onClick={this.buttonClick.bind(this)}>Submit</button>
                     <span onClick={this.enableCompare}>Want to Compare</span>
                     {compareElement}

@@ -1,1 +1,2 @@
 export const FETCH_CITY = 'FETCH_CITY';
+export const FETCH_SECONDARY_CITY = 'FETCH_SECONDARY_CITY';
