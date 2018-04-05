@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
 import * as actions from './actions';
 import Detailscomponent from './components/detailsComponent';
 import Chartcomponent from './components/chartComponent';
@@ -9,7 +10,8 @@ class Dashboard extends Component {
         super(props);
         this.state = {
             selectedCity: '',
-            isCompare: false
+            isCompare: false,
+            compareText: 'I Want to compare'
         };
         this.populateCity = this.populateCity.bind(this);
         this.buttonClick = this.buttonClick.bind(this);
@@ -18,7 +20,11 @@ class Dashboard extends Component {
     }
 
     enableCompare() {
-        this.setState({ isCompare: true, secondaryCity: '' });
+        this.setState({ 
+            isCompare: !this.state.isCompare, 
+            secondaryCity: '', 
+            compareText: !this.state.isCompare ? 'I don\'t want to compare' : 'I want to compare' 
+        });
     }
 
     buttonClick = () => {
@@ -69,11 +75,15 @@ class Dashboard extends Component {
 
         return (
             <div>
-                <div className="inputPanel">
-                    <input id="primaryCity" type="text" placeholder="Search your city" onChange={this.populateCity} size="50" autoComplete="on" />
-                    <button onClick={this.buttonClick.bind(this)}>Submit</button>
-                    <span onClick={this.enableCompare}>Want to Compare</span>
-                    {compareElement}
+                <div className="formPanel">
+                    <div className="inputPanel">
+                        <input id="primaryCity" type="text" placeholder="Search your city" onChange={this.populateCity} size="50" autoComplete="on" />
+                        {compareElement}
+                    </div>
+                    <div className="buttonPanel">
+                        <Button bsStyle="primary" onClick={this.buttonClick.bind(this)}>Submit</Button>
+                        <span onClick={this.enableCompare} className="anchorElement">{this.state.compareText}</span>
+                    </div>
                 </div>
                 <div>
                     {this.props.cities ? <Detailscomponent selectedCity={this.props.cities.selectedCity} weatherList={this.props.cities.weatherList} /> : ''}
