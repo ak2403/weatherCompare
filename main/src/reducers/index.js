@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import asyncReducer from './asyncReducer';
+import secondaryReducer from './secondaryReducer';
 
 export default combineReducers({
-    cities: asyncReducer
+    cities: asyncReducer,
+    secondaryCities: secondaryReducer
 });

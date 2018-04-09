@@ -10,7 +10,6 @@ class tooltipComponent extends Component {
     }
 
     render() {
-        debugger
         return (
             <div>Hi</div>
         )

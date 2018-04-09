@@ -36,8 +36,20 @@ block{
     width: 50%;
     float: right;
 }
-.inputPanel{
+.formPanel{
     width: 100%;
     margin: 20px 0;
     text-align: center;
+}
+.inputPanel input{
+    margin: 0 10px;
+    border: 1px solid #eee;
+    padding: 5px 15px;
+}
+.anchorElement{
+    cursor: pointer;
+    color: blue;
+}
+.buttonPanel{
+    margin-top: 10px;
 }
