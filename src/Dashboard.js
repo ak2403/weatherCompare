@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap';
 import * as actions from './actions';
 import Detailscomponent from './components/detailsComponent';
 import Chartcomponent from './components/chartComponent';
+import CompareCityComponent from './layouts/compareCityComponent';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -20,10 +21,10 @@ class Dashboard extends Component {
     }
 
     enableCompare() {
-        this.setState({ 
-            isCompare: !this.state.isCompare, 
-            secondaryCity: '', 
-            compareText: !this.state.isCompare ? 'I don\'t want to compare' : 'I want to compare' 
+        this.setState({
+            isCompare: !this.state.isCompare,
+            secondaryCity: '',
+            compareText: !this.state.isCompare ? 'I don\'t want to compare' : 'I want to compare'
         });
     }
 
@@ -67,10 +68,26 @@ class Dashboard extends Component {
     }
 
     render() {
-        let compareElement = '';
+        let compareElement = '',
+            renderElement = '';
 
         if (this.state.isCompare) {
             compareElement = <input id="secondaryCity" type="text" placeholder="Search your city" onChange={this.populateCity} size="50" autoComplete="on" />;
+            renderElement =
+                <div>
+                    <CompareCityComponent />
+                </div>
+        } else {
+            renderElement =
+                <div>
+                    <div>
+                        {this.props.cities ? <Detailscomponent selectedCity={this.props.cities.selectedCity} weatherList={this.props.cities.weatherList} /> : ''}
+                    </div>
+
+                    <div>
+                        {this.props.cities ? <Chartcomponent selectedCity={this.props.cities.selectedCity} weatherList={this.props.cities.weatherList} ref={node => this.node = node} /> : ''}
+                    </div>
+                </div>
         }
 
         return (
@@ -85,13 +102,9 @@ class Dashboard extends Component {
                         <span onClick={this.enableCompare} className="anchorElement">{this.state.compareText}</span>
                     </div>
                 </div>
-                <div>
-                    {this.props.cities ? <Detailscomponent selectedCity={this.props.cities.selectedCity} weatherList={this.props.cities.weatherList} /> : ''}
-                </div>
 
-                <div>
-                    {this.props.cities ? <Chartcomponent selectedCity={this.props.cities.selectedCity} weatherList={this.props.cities.weatherList} ref={node => this.node = node} /> : ''}
-                </div>
+                {renderElement}
+
             </div>
         )
     }
