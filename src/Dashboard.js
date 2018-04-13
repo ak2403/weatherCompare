@@ -17,6 +17,14 @@ class Dashboard extends Component {
         this.buttonClick = this.buttonClick.bind(this);
         this.enableCompare = this.enableCompare.bind(this);
         this.changeState = this.changeState.bind(this);
+        console.log("constructor func")
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextState.secondaryCity && nextState.isCompare)
+            return true;
+        else
+            return false;
     }
 
     /**
@@ -75,7 +83,6 @@ class Dashboard extends Component {
                 });
             });
         }
-
     }
 
     render() {
@@ -87,9 +94,9 @@ class Dashboard extends Component {
             renderElement = <CompareCityComponent />
         } else {
             renderElement = <SingleCityComponent />
-                
-        }
 
+        }
+        
         return (
             <div>
                 <div className="formPanel">
