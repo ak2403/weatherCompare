@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import * as actions from './actions';
-import Detailscomponent from './components/detailsComponent';
-import Chartcomponent from './components/chartComponent';
+import SingleCityComponent from './layouts/SingleCityComponent';
 import CompareCityComponent from './layouts/compareCityComponent';
 
 class Dashboard extends Component {
@@ -20,6 +19,10 @@ class Dashboard extends Component {
         this.changeState = this.changeState.bind(this);
     }
 
+    /**
+     * Function execute when Multi-City 
+     *  enable or disenable
+     */
     enableCompare() {
         this.setState({
             isCompare: !this.state.isCompare,
@@ -28,6 +31,10 @@ class Dashboard extends Component {
         });
     }
 
+    /**
+     * Function execute when the 
+     *  'Compare' button clicked
+     */
     buttonClick = () => {
         this.props.fetchCity({ city: this.state.selectedCity.name });
         if (this.state.isCompare) {
@@ -35,6 +42,10 @@ class Dashboard extends Component {
         }
     }
 
+    /**
+     * Function to change the state
+     * @param {*} state - Contains the state props
+     */
     changeState(state) {
         this.setState(state);
     }
@@ -73,21 +84,10 @@ class Dashboard extends Component {
 
         if (this.state.isCompare) {
             compareElement = <input id="secondaryCity" type="text" placeholder="Search your city" onChange={this.populateCity} size="50" autoComplete="on" />;
-            renderElement =
-                <div>
-                    <CompareCityComponent />
-                </div>
+            renderElement = <CompareCityComponent />
         } else {
-            renderElement =
-                <div>
-                    <div>
-                        {this.props.cities ? <Detailscomponent selectedCity={this.props.cities.selectedCity} weatherList={this.props.cities.weatherList} /> : ''}
-                    </div>
-
-                    <div>
-                        {this.props.cities ? <Chartcomponent selectedCity={this.props.cities.selectedCity} weatherList={this.props.cities.weatherList} ref={node => this.node = node} /> : ''}
-                    </div>
-                </div>
+            renderElement = <SingleCityComponent />
+                
         }
 
         return (

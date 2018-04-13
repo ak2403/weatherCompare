@@ -24,7 +24,7 @@ class detailsComponent extends Component {
                             <Panel.Body className="secondaryDetailPanel">
                                 <Row className="show-grid tempDetails">
                                     <Col xs={12} md={3}>
-                                        <img src="./images/temp.png" width="60%" />
+                                        <img src="./images/temp.png" alt="Temperature-icon" width="60%" />
                                     </Col>
                                     <Col xs={12} md={3}>
                                         <span className='temps'>Min Temp:
@@ -35,7 +35,7 @@ class detailsComponent extends Component {
                                         </span>
                                     </Col>
                                     <Col xs={12} md={3}>
-                                        <img src="./images/wind.png" width="60%" />
+                                        <img src="./images/wind.png" alt="wind-icon" width="60%" />
                                     </Col>
                                     <Col xs={12} md={3}>
                                         <span className='temps'>Speed:
@@ -49,7 +49,7 @@ class detailsComponent extends Component {
 
                                 <Row className="show-grid tempDetails">
                                     <Col xs={12} md={3}>
-                                        <img src="./images/humidity.png" width="60%" />
+                                        <img src="./images/humidity.png" alt="humidity-icon" width="60%" />
                                     </Col>
                                     <Col xs={12} md={3}>
                                         <span className='temps'>Pressure:
@@ -60,7 +60,7 @@ class detailsComponent extends Component {
                                         </span>
                                     </Col>
                                     <Col xs={12} md={3}>
-                                        <img src="./images/location.png" width="60%" />
+                                        <img src="./images/location.png" alt="location-icon" width="60%" />
                                     </Col>
                                     <Col xs={12} md={3}>
                                         <span className='temps'>Lat:
