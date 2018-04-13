@@ -11,13 +11,13 @@ class Dashboard extends Component {
         this.state = {
             selectedCity: '',
             isCompare: false,
-            compareText: 'I Want to compare'
+            compareText: 'I Want to compare',
+            isValid: false
         };
         this.populateCity = this.populateCity.bind(this);
         this.buttonClick = this.buttonClick.bind(this);
         this.enableCompare = this.enableCompare.bind(this);
         this.changeState = this.changeState.bind(this);
-        console.log("constructor func")
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -89,6 +89,16 @@ class Dashboard extends Component {
         let compareElement = '',
             renderElement = '';
 
+        const Styles = {
+            buttonStyle: {
+                width: '100px',
+                height: '30px',
+                backgroundColor: '#3498db',
+                border: '1px solid #3498db',
+                color: '#fff'
+            }
+        };
+
         if (this.state.isCompare) {
             compareElement = <input id="secondaryCity" type="text" placeholder="Search your city" onChange={this.populateCity} size="50" autoComplete="on" />;
             renderElement = <CompareCityComponent />
@@ -96,7 +106,7 @@ class Dashboard extends Component {
             renderElement = <SingleCityComponent />
 
         }
-        
+
         return (
             <div>
                 <div className="formPanel">
@@ -105,7 +115,7 @@ class Dashboard extends Component {
                         {compareElement}
                     </div>
                     <div className="buttonPanel">
-                        <Button bsStyle="primary" onClick={this.buttonClick.bind(this)}>Submit</Button>
+                        <button style={Styles.buttonStyle} onClick={this.buttonClick.bind(this)}>Submit</button>
                         <span onClick={this.enableCompare} className="anchorElement">{this.state.compareText}</span>
                     </div>
                 </div>
