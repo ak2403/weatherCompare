@@ -112,6 +112,7 @@ class Dashboard extends Component {
                 renderElement = this.props.cities ? <SingleCityComponent /> : ''
                 break;
         }
+        // renderElement = <CompareCityComponent />
 
         return (
             <div>
