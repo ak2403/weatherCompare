@@ -10,21 +10,16 @@ class Dashboard extends Component {
         super(props);
         this.state = {
             selectedCity: '',
+            secondaryCity: '',
             isCompare: false,
             compareText: 'I Want to compare',
             isValid: false
         };
-        this.populateCity = this.populateCity.bind(this);
+        this.populatePrimaryCity = this.populatePrimaryCity.bind(this);
+        this.populateSecondaryCity = this.populateSecondaryCity.bind(this);
         this.buttonClick = this.buttonClick.bind(this);
         this.enableCompare = this.enableCompare.bind(this);
         this.changeState = this.changeState.bind(this);
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        if (nextState.secondaryCity && nextState.isCompare)
-            return true;
-        else
-            return false;
     }
 
     /**
@@ -34,7 +29,6 @@ class Dashboard extends Component {
     enableCompare() {
         this.setState({
             isCompare: !this.state.isCompare,
-            secondaryCity: '',
             compareText: !this.state.isCompare ? 'I don\'t want to compare' : 'I want to compare'
         });
     }
@@ -58,7 +52,7 @@ class Dashboard extends Component {
         this.setState(state);
     }
 
-    populateCity = () => {
+    populatePrimaryCity = () => {
         const google = window.google;
 
         let options = {
@@ -73,16 +67,23 @@ class Dashboard extends Component {
                 'selectedCity': place
             });
         });
+    }
 
-        if (this.state.isCompare) {
-            let secondaryAutocomplete = new google.maps.places.Autocomplete(document.getElementById('secondaryCity'), options);
-            secondaryAutocomplete.addListener('place_changed', () => {
-                let place = autocomplete.getPlace();
-                this.changeState({
-                    'secondaryCity': place
-                });
+    populateSecondaryCity = () => {
+        const google = window.google;
+
+        let options = {
+            types: ['geocode'],
+            stateProp: this
+        };
+
+        let secondaryAutocomplete = new google.maps.places.Autocomplete(document.getElementById('secondaryCity'), options);
+        secondaryAutocomplete.addListener('place_changed', () => {
+            let place = secondaryAutocomplete.getPlace();
+            this.changeState({
+                'secondaryCity': place
             });
-        }
+        });
     }
 
     render() {
@@ -99,19 +100,24 @@ class Dashboard extends Component {
             }
         };
 
-        if (this.state.isCompare) {
-            compareElement = <input id="secondaryCity" type="text" placeholder="Search your city" onChange={this.populateCity} size="50" autoComplete="on" />;
-            renderElement = <CompareCityComponent />
-        } else {
-            renderElement = <SingleCityComponent />
+        if (this.state.isCompare)
+            compareElement = <input id="secondaryCity" type="text" placeholder="Search your city" onChange={this.populateSecondaryCity} size="50" autoComplete="on" />;
 
+
+        switch (this.state.isCompare) {
+            case true:
+                renderElement = (this.props.cities && this.props.secondaryCities) ? <CompareCityComponent /> : ''
+                break;
+            case false:
+                renderElement = this.props.cities ? <SingleCityComponent /> : ''
+                break;
         }
 
         return (
             <div>
                 <div className="formPanel">
                     <div className="inputPanel">
-                        <input id="primaryCity" type="text" placeholder="Search your city" onChange={this.populateCity} size="50" autoComplete="on" />
+                        <input id="primaryCity" type="text" placeholder="Search your city" onChange={this.populatePrimaryCity} size="50" autoComplete="on" />
                         {compareElement}
                     </div>
                     <div className="buttonPanel">
@@ -127,9 +133,9 @@ class Dashboard extends Component {
     }
 }
 
-function mapStateToProps({ cities }) {
+function mapStateToProps({ cities, secondaryCities }) {
     return {
-        cities
+        cities, secondaryCities
     }
 }
 

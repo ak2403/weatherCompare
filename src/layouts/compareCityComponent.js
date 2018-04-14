@@ -1,7 +1,17 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 import { Table, Grid } from 'react-bootstrap';
 
 class compareCityComponent extends Component {
+    constructor(props){
+        super();
+    }
+
+    componentWillMount(){
+        debugger
+    }
+
     render() {
         return (
             <div>
@@ -33,4 +43,10 @@ class compareCityComponent extends Component {
     }
 }
 
-export default compareCityComponent;
+function mapStateToProps({ cities, secondaryCities }) {
+    return {
+        cities, secondaryCities
+    }
+}
+
+export default connect(mapStateToProps, actions)(compareCityComponent);
