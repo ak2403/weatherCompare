@@ -10,14 +10,16 @@ class detailsComponent extends Component {
     }
 
     render() {
-        const { name, sys, coord, wind, main } = this.props.selectedCity;
+        const { name, sys, coord, wind, main, weather } = this.props.selectedCity;
+        debugger
         return (
             <Grid>
                 <Row className="show-grid">
                     <Col xs={12} md={12}>
                         <Panel style={{'height': '250px'}}>
+                            
                             <Panel.Body className="mainDetailPanel">
-                                <span className="temperature">{main.temp}&deg;C</span>
+                                <span className="temperature"><img src={"http://openweathermap.org/img/w/" + weather[0].icon+ ".png"} />{main.temp}&deg;C</span>
                                 <span className="cityname">{name}</span>
                                 <span className="countryname">{sys.country}</span>
                             </Panel.Body>
