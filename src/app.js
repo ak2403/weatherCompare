@@ -6,11 +6,21 @@ import Dashboard from './Dashboard';
 
 class App extends Component{
     render(){
+        const Styles = {
+            creditStyle: {
+                position: 'absolute',
+                bottom: 0,
+                right: '30px',
+                fontSize: '12px'
+            }
+        };
+
         return (
             <div>
                 <BrowserRouter>
                     <Route path='/' component={Dashboard}/>
                 </BrowserRouter>
+                <div style={Styles.creditStyle}>Created by Arun Kumar</div>
             </div>
         )
     }
